@@ -1,4 +1,5 @@
 import { api } from "@/trpc/server";
+import ChatInput from "./components/ChatInput";
 
 export default async function Home() {
   // Fetch "Hello world" from tRPC
@@ -9,6 +10,7 @@ export default async function Home() {
       <p className="text-7xl text-center">
       {greeting}
       </p>
+      <ChatInput />
     </main>
   );
 }
