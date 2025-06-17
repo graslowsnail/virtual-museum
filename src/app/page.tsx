@@ -1,5 +1,4 @@
 import { api } from "@/trpc/server";
-import AIImageGenerator from "@/components/ai-image-generator";
 
 export default async function Home() {
   // Fetch "Hello world" from tRPC
@@ -7,7 +6,9 @@ export default async function Home() {
 
   return (
     <main className="items-center justify-center">
-      <AIImageGenerator/>
+      <p className="text-7xl text-center">
+      {greeting}
+      </p>
     </main>
   );
 }
