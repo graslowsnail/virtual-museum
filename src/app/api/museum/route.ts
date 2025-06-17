@@ -86,7 +86,7 @@ export async function POST(req: Request): Promise<Response> {
     •If the request is a single broad culture / nationality / era
         (e.g. "Mexican", "Baroque", "Roman"), enrich the query
         by adding 2-4 art-specific words such as "art", "painting",
-        "sculpture", "folk", "mural", "ceramic", etc THAT RELATE TO THAT CULTURE THE MOST.
+        "sculpture", "folk", "mural", "ceramic", etc THAT RELATES TO THAT CULTURE THE MOST.
     `,
     messages,
     tools: {
@@ -103,7 +103,7 @@ export async function POST(req: Request): Promise<Response> {
                   '• Use nouns and adjective modifiers only (omit filler words like "show me").',
                   "• Include synonyms or related terms if they improve recall.",
                   "• If the user mentions a time period, medium, or culture, add those words.",
-                  "• If the user gives a vauge culture/place/era, append extra art keywords THAT RELATE MOST TO THAT culture/place/era to broaden coverage.",
+                  "• If the user gives a vauge culture/place/era, append extra art keywords THAT RELATES MOST TO THAT culture/place/era to broaden coverage.",
                   "• Separate multiple concepts with spaces, not punctuation.",
                   "Examples:",
                   '  User: "I want to see Japanese samurai armor from the Edo period"',
