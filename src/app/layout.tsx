@@ -29,9 +29,9 @@ export default function RootLayout({
         <TRPCReactProvider>
           {/* Auth Status Bar at the top */}
           <div className="h-screen max-h-screen ">
-              <div className="absolute top-0 left-0 right-0 border-b border-violet-400 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+              <div className="absolute top-0 left-0 right-0 border-b border-zinc-800 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="flex h-16 items-center justify-between px-4">
-                  <h1 className="text-lg font-semibold">Artefact AI</h1>
+                  <h1 className="text-2xl font-mono bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent mb-1">Artefact AI</h1>
                   <AuthStatus />
                 </div>
               </div>

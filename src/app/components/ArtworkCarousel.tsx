@@ -6,6 +6,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "./ui/carousel";
+import { HeartCrack } from "lucide-react";
+import { useState } from "react";
 
 interface Artwork {
   objectID: number;
@@ -21,6 +23,7 @@ interface ArtworkCarouselProps {
 }
 
 export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
+  const [imageLoaded, setImageLoaded] = useState(true);
   // finter out artwork with no imgage
   const validArtworks = artworks.filter(
     (artwork) => artwork.primaryImage && artwork.primaryImage.trim() !== "",
@@ -28,8 +31,16 @@ export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
 
   if (validArtworks.length === 0) {
     return (
-      <div className="text-center text-gray-500 py-8">
-        No artworks with images found.
+      <div className="py-16 text-center">
+        <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-300 to-violet-500">
+          <HeartCrack size={48} color="#18181b" strokeWidth={1.75} />
+        </div>
+        <h3 className="mb-2 font-mono text-xl font-semibold text-gray-500">
+          🧙 Agent standing by...
+        </h3>
+        <p className="mx-auto max-w-md font-mono text-gray-400">
+          Ready to explore the dungeons and bring you ancient artifacts!
+        </p>
       </div>
     );
   }
@@ -40,17 +51,27 @@ export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
         {validArtworks.map((artwork, index) => (
           <CarouselItem className="md:basis-1/2 lg:basis-1/3" key={index}>
             <div className="p-1">
-              <div className="border border-violet-400 rounded-lg overflow-hidden h-[600px] flex flex-col hover:ring-violet-500/50 hover:ring-[3px] transition-all duration-200 cursor-pointer">
+              <div className="flex h-[600px] cursor-pointer flex-col overflow-hidden rounded-lg border border-violet-400 transition-all duration-200 hover:ring-[3px] hover:ring-violet-500/50">
                 <div className="p-3">
+                  {!imageLoaded && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="h-16 w-16 animate-spin rounded-full border-9 border-violet-300 border-t-transparent" />
+                    </div>
+                  )}
                   <img
                     src={artwork.primaryImage}
                     alt={artwork.title}
-                    className="h-80 w-full object-cover rounded-md"
+                    className={`h-80 w-full rounded-md object-cover transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+                    onLoad={() => setImageLoaded(true)}
+                    loading="lazy"
                   />
                 </div>
-                <div className="p-4 flex-1 flex flex-col justify-between">
+
+                <div className="flex flex-1 flex-col justify-between p-4">
                   <div>
-                    <h3 className="text-lg font-bold line-clamp-2">{artwork.title}</h3>
+                    <h3 className="line-clamp-2 text-lg font-bold">
+                      {artwork.title}
+                    </h3>
                     <p className="text-gray-600">{artwork.artist}</p>
                     <p className="text-sm text-gray-500">{artwork.date}</p>
                   </div>
