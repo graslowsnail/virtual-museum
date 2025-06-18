@@ -1,7 +1,7 @@
 "use client"
 import { useSession, signIn, signOut  } from "@/lib/auth-client"
 import { Button } from "./ui/button"
-import { LogIn, LogOut, User, Github, Google} from "lucide-react"
+import { LogIn, LogOut, User, Github } from "lucide-react"
 
 export function AuthStatus() {
     const { data: session, isPending } = useSession()
