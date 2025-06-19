@@ -1,0 +1,1 @@
+// this will have logic for maping favorited artwork, user ids and artwork id

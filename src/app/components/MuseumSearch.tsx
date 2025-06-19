@@ -1,5 +1,5 @@
-"use client";
-import { api } from "@/trpc/react"; // Change this line
+"use client"
+import { api } from "@/trpc/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
