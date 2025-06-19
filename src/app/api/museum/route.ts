@@ -2,8 +2,10 @@ import { openai } from "@ai-sdk/openai";
 import { generateText, type CoreMessage } from "ai";
 import { tool } from "ai";
 import { z } from "zod";
+import { saveArtworks } from "@/controllers/artworkController";
 
-interface MuseumArtwork {
+
+export interface MuseumArtwork {
   objectID: number;
   title: string;
   artist: string;
@@ -61,6 +63,9 @@ async function searchMET(query: string ) {
   );
 
   const filteredArtworks = artworks.filter(Boolean) as MuseumArtwork[];
+
+  // save to our db hehehe
+  await saveArtworks(filteredArtworks)
 
   return {
     total: data.total,
