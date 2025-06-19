@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import { api } from "@/trpc/react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
-import { HeartCrack } from "lucide-react";
+import { HeartCrack, Search } from "lucide-react";
 import ArtworkCarousel from "./ArtworkCarousel";
 
 export default function MuseumSearch() {
@@ -43,6 +43,22 @@ export default function MuseumSearch() {
           )}
         </Button>
       </div>
+      {/* Show initial state when no search has been made */}
+      {!museumSearch.isPending &&
+        !museumSearch.isSuccess &&
+        !museumSearch.isError && (
+          <div className="py-16 text-center">
+            <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-300 to-violet-500">
+              <Search size={48} color="#18181b" strokeWidth={1.75} />
+            </div>
+            <h3 className="mb-2 font-mono text-xl font-semibold text-gray-500">
+              🧙 Agent standing by...
+            </h3>
+            <p className="mx-auto max-w-md font-mono text-gray-400">
+              Ready to explore the dungeons and bring you ancient artifacts!
+            </p>
+          </div>
+        )}
 
       {/* Show loading state */}
       {museumSearch.isPending && (
@@ -70,6 +86,7 @@ export default function MuseumSearch() {
           </p>
         </div>
       )}
+
       {museumSearch.isSuccess && museumSearch.data?.artworks && (
         <ArtworkCarousel artworks={museumSearch.data.artworks} />
       )}

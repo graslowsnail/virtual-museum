@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
+import Link from "next/link";
 
 import { TRPCReactProvider } from "@/trpc/react";
 import { AuthStatus } from "./components/auth-status";
@@ -31,7 +32,11 @@ export default function RootLayout({
           <div className="h-screen max-h-screen ">
               <div className="absolute top-0 left-0 right-0 border-b border-zinc-800 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="flex h-16 items-center justify-between px-4">
-                  <h1 className="text-2xl font-mono bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent mb-1">Artefact AI</h1>
+                  <Link href="/">
+                    <h1 className="text-2xl font-mono bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent mb-1 hover:from-violet-400 hover:to-violet-600 transition-all cursor-pointer">
+                      Artefact AI
+                    </h1>
+                  </Link>
                   <AuthStatus />
                 </div>
               </div>
