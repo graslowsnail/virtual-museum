@@ -63,7 +63,7 @@ async function searchMET(query: string ) {
   );
 
   const filteredArtworks = artworks.filter(Boolean) as MuseumArtwork[];
-
+// 
   // save to our db hehehe
   await saveArtworks(filteredArtworks)
 
@@ -114,9 +114,9 @@ export async function POST(req: Request): Promise<Response> {
                   '  User: "I want to see Japanese samurai armor from the Edo period"',
                   '  query -> "samurai armor japan edo"',
                   '  User: "Paintings of sunflowers by Van Gogh"',
-                  '  query -> "van gogh sunflower painting"',
+                  '  query -> "van gogh sunflower"',
                   '  User: "I want to see somthing mexican"',
-                  '  query -> "mexican art mural folk painting"',
+                  '  query -> "mexican art mural folk "',
                   '  User: "I want to see somthing egyptian"',
                   '  query -> "egyptian art sculpture hieroglyph papyrus"',
                 ].join("\n"),

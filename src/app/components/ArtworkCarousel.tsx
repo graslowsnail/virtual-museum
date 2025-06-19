@@ -1,4 +1,5 @@
 "use client";
+import { useSession } from "@/lib/auth-client";
 import {
   Carousel,
   CarouselContent,
@@ -8,6 +9,7 @@ import {
 } from "./ui/carousel";
 import { HeartCrack } from "lucide-react";
 import { useState } from "react";
+import FavoriteButton from "./FavoriteButton";
 
 interface Artwork {
   objectID: number;
@@ -24,6 +26,8 @@ interface ArtworkCarouselProps {
 
 export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
   const [imageLoaded, setImageLoaded] = useState(true);
+  const { data: session, isPending } = useSession();
+
   // finter out artwork with no imgage
   const validArtworks = artworks.filter(
     (artwork) => artwork.primaryImage && artwork.primaryImage.trim() !== "",
@@ -36,10 +40,10 @@ export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
           <HeartCrack size={48} color="#18181b" strokeWidth={1.75} />
         </div>
         <h3 className="mb-2 font-mono text-xl font-semibold text-gray-500">
-          🧙 Agent standing by...
+          🪦 You'r agent died while exploring the dungeon:(
         </h3>
         <p className="mx-auto max-w-md font-mono text-gray-400">
-          Ready to explore the dungeons and bring you ancient artifacts!
+          Search again to for him to respawn:)
         </p>
       </div>
     );
@@ -67,7 +71,7 @@ export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
                   />
                 </div>
 
-                <div className="flex flex-1 flex-col justify-between p-4">
+                <div className="flex flex-2 flex-col justify-between p-4">
                   <div>
                     <h3 className="line-clamp-2 text-lg font-bold">
                       {artwork.title}
@@ -75,6 +79,15 @@ export default function ArtworkCarousel({ artworks }: ArtworkCarouselProps) {
                     <p className="text-gray-600">{artwork.artist}</p>
                     <p className="text-sm text-gray-500">{artwork.date}</p>
                   </div>
+
+                  <div className="flex justify-center">
+                    <FavoriteButton 
+                      artwork={artwork} 
+                      user={session?.user} 
+                      isLoading={isPending}
+                    />
+                  </div>
+
                 </div>
               </div>
             </div>

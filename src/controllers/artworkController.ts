@@ -4,6 +4,18 @@ import { eq } from "drizzle-orm";
 import type { MuseumArtwork } from "@/app/api/museum/route";
 
 export async function saveArtwork(art: MuseumArtwork) {
+  console.log("🔍 Saving artwork:", {
+    objectID: art.objectID,
+    title: art.title,
+    type: typeof art.objectID
+  });
+  
+  // Validate objectID before insert
+  if (!art.objectID || typeof art.objectID !== 'number') {
+    console.error("❌ Invalid objectID:", art.objectID, "for artwork:", art);
+    return; // Skip this artwork
+  }
+
   // try to insert or update if it already exist
   await db
     .insert(artwork)
