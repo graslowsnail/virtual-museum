@@ -32,11 +32,19 @@ export default function RootLayout({
           <div className="h-screen max-h-screen ">
               <div className="absolute top-0 left-0 right-0 border-b border-zinc-800 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
                 <div className="flex h-16 items-center justify-between px-4">
-                  <Link href="/">
-                    <h1 className="text-2xl font-mono bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent mb-1 hover:from-violet-400 hover:to-violet-600 transition-all cursor-pointer">
-                      Artefact AI
-                    </h1>
-                  </Link>
+                  <div className="flex items-center gap-8">
+                    <Link href="/">
+                      <h1 className="text-2xl font-mono bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent mb-1 hover:from-violet-400 hover:to-violet-600 transition-all cursor-pointer">
+                        Artefact AI
+                      </h1>
+                    </Link>
+                    <Link href="/favorites/me" className="text-lg font-mono">
+                      <span>🏛️</span>{" "}
+                      <span className="bg-gradient-to-r from-violet-300 to-violet-500 bg-clip-text text-transparent hover:from-violet-400 hover:to-violet-600 transition-all">
+                        Vault
+                      </span>
+                    </Link>
+                  </div>
                   <AuthStatus />
                 </div>
               </div>
@@ -45,13 +53,6 @@ export default function RootLayout({
               <Providers>
                 {children}
               </Providers>
-
-              {/* Optional: Auth status at bottom for mobile */}
-              <div className="md:hidden border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                <div className="container flex h-12 items-center justify-center px-4">
-                  <AuthStatus />
-                </div>
-              </div>
             </div>
         </TRPCReactProvider>
       </body>
