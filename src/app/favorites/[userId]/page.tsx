@@ -1,7 +1,7 @@
 "use client";
 import { api } from "@/trpc/react";
 import { useSession } from "@/lib/auth-client";
-import { Heart, HeartOff, HeartCrack } from "lucide-react";
+import { Heart, HeartOff, Landmark } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function FavoritesPage() {
@@ -46,7 +46,7 @@ export default function FavoritesPage() {
       <div className="flex min-h-screen flex-col items-center justify-center pt-20">
         <div className="text-center">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-300 to-violet-500">
-            <HeartOff size={48} color="#18181b" strokeWidth={1.75} />
+            <Landmark size={48} color="#18181b" strokeWidth={1.75} />
           </div>
           <h3 className="mb-2 font-mono text-xl font-semibold text-gray-500">
             🔒 Vault locked
@@ -71,7 +71,7 @@ export default function FavoritesPage() {
       <div className="flex min-h-screen flex-col items-center justify-center pt-20">
         <div className="text-center">
           <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-violet-300 to-violet-500">
-            <Heart size={48} color="#18181b" strokeWidth={1.75} />
+            <Landmark size={48} color="#18181b" strokeWidth={1.75} />
           </div>
           <h3 className="mb-1 text-4xl font-mono">
             <span>📦</span>{" "}
