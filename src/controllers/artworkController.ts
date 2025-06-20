@@ -61,7 +61,7 @@ export async function getExistingObjectIds(objectIds: number[]): Promise<number[
   return existingArtworks.map(art => art.objectID);
 }
 
-// Get artworks from database by object IDs in random order
+// Get artworks from database by object IDs
 export async function getArtworksByObjectIds(objectIds: number[]): Promise<MuseumArtwork[]> {
   if (objectIds.length === 0) {
     return [];
@@ -70,8 +70,7 @@ export async function getArtworksByObjectIds(objectIds: number[]): Promise<Museu
   const artworks = await db
     .select()
     .from(artwork)
-    .where(inArray(artwork.objectID, objectIds))
-    .orderBy(sql`RANDOM()`);  // Database-level randomization
+    .where(inArray(artwork.objectID, objectIds));
 
   // Transform DB results to match MuseumArtwork interface
   return artworks.map(art => ({
