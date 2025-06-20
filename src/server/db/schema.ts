@@ -85,6 +85,19 @@ export const artwork = pgTable("artwork", {
   primaryImage: text("primary_image"),
   department: text("department"),
   culture: text("culture"),
+
+  // new fields for semantic search
+  additionalImages: text("additional_images"), // This defines a text column
+  objectURL: text("object_url"),
+  isHighlight: boolean("is_highlight").default(false),
+  artistDisplayBio: text("artist_display_bio"),
+  objectBeginDate: integer("object_begin_date"),
+  objectEndDate: integer("object_end_date"),
+  creditLine: text("credit_line"),
+  classification: text("classification"),
+  artistNationality: text("artist_nationality"),
+  primaryImageSmall: text("primary_image_small"),
+
   createdAt: timestamp("created_at").$defaultFn(() => new Date()).notNull(),
 });
 
