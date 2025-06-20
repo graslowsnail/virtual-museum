@@ -13,7 +13,12 @@ export default function MuseumSearch() {
 
   // Test call (you can put this in a button click)
   function onSubmit() {
-    museumSearch.mutate({ query: userQuery });
+    // Create the messages array that the AI expects
+    const messages = [
+      { role: "user" as const, content: userQuery }
+    ];
+    
+    museumSearch.mutate({ messages });
   }
 
   return (

@@ -1,7 +1,7 @@
 import { db } from "@/server/db";
 import { artwork } from "@/server/db/schema";
-import { eq } from "drizzle-orm";
-import type { MuseumArtwork } from "@/app/api/museum/route";
+import { eq, inArray, sql } from "drizzle-orm";
+import type { MuseumArtwork } from "@/server/api/routers/museum";
 
 export async function saveArtwork(art: MuseumArtwork) {
   console.log("🔍 Saving artwork:", {
@@ -50,3 +50,38 @@ export async function saveArtworks(artworks: MuseumArtwork[]) {
       await saveArtwork(art);
     }
   }
+
+  // Check which object IDs already exist in the database
+export async function getExistingObjectIds(objectIds: number[]): Promise<number[]> {
+  const existingArtworks = await db
+    .select({ objectID: artwork.objectID })
+    .from(artwork)
+    .where(inArray(artwork.objectID, objectIds));
+  
+  return existingArtworks.map(art => art.objectID);
+}
+
+// Get artworks from database by object IDs in random order
+export async function getArtworksByObjectIds(objectIds: number[]): Promise<MuseumArtwork[]> {
+  if (objectIds.length === 0) {
+    return [];
+  }
+
+  const artworks = await db
+    .select()
+    .from(artwork)
+    .where(inArray(artwork.objectID, objectIds))
+    .orderBy(sql`RANDOM()`);  // Database-level randomization
+
+  // Transform DB results to match MuseumArtwork interface
+  return artworks.map(art => ({
+    objectID: art.objectID,
+    title: art.title,
+    artist: art.artist || "",
+    date: art.date || "",
+    medium: art.medium || "",
+    primaryImage: art.primaryImage || "",
+    department: art.department || "",
+    culture: art.culture || undefined,
+  }));
+}
